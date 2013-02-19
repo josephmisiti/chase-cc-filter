@@ -18,6 +18,8 @@ Customer Center -> See Account Statements -> Credit Card
 2012-03.pdf
 ...
 
+put them in the same directory as these files in a directory called "pdfs"
+
 3. Install pdftotext
 
 brew install xpdf

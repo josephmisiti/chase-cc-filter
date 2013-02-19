@@ -38,6 +38,7 @@ def filter_by_tags(tags, info):
 	return tag_hit
 
 def clean(files, tags=[]):
+	total_cost = 0.0
 	for f in files:
 		lines = open(f,'r').readlines()
 		for line in lines:
@@ -53,7 +54,9 @@ def clean(files, tags=[]):
 				else:						
 					if filter_by_tags(tags, line.strip().split()[1:-1]):
 						print date_of_tranaction,transaction_info, convert_to_float(amount)
-		
+						total_cost += convert_to_float(amount)
+						
+	print "The total was ", total_cost
 		
 if __name__ == "__main__":
 	if len(sys.argv) > 1:
