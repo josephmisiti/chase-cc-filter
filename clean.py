@@ -4,6 +4,10 @@
 ### clean up these fucking pdfs ...
 ###
 
+"""
+	./clean.py attm
+"""
+
 import os,sys,glob,re
 
 TRANSACTION_LINE_REGEX = re.compile('(^[0-9]{2}\/[0-9]{2}[\s])')
@@ -53,7 +57,7 @@ def clean(files, tags=[]):
 					print date_of_tranaction,transaction_info, convert_to_float(amount)
 				else:						
 					if filter_by_tags(tags, line.strip().split()[1:-1]):
-						print date_of_tranaction,transaction_info, convert_to_float(amount)
+						print "%s\t%s\t%s" % (date_of_tranaction,transaction_info, convert_to_float(amount))
 						total_cost += convert_to_float(amount)
 						
 	print "The total was ", total_cost
