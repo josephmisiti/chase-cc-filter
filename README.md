@@ -1,8 +1,8 @@
 # Chase Credit Card Processing
 
 This software was built and used because doing taxes really fucking sucks, and it sucks even more
-when your bank with chase. They only will give you your CC statements in pdf form (you can get the last
-three months in csv format ...) and their customized search stuff sucks. This process will take your PDFS,
+when you bank with chase. They will only give you your CC statements in pdf form (you can get the last
+three months in csv format ...) and their customized search stuff sucks. This process will take your PDFs,
 convert them to text, and the give you the ability to filter them using a tagging (comma separated command line)
 system.
 
