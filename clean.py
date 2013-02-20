@@ -1,11 +1,21 @@
 #!/usr/bin/python
 
-###
-### clean up these fucking pdfs ...
-###
-
 """
-	./clean.py attm
+	Filter credit cards statements from Chase.com. 
+	
+	Usage:
+	
+	./clean <command-separated-tags> [case-insensitive]
+	
+	Example usage:
+	
+	./clean.py attm <--- filters all of my  AT&T wireless charges
+	./clean.py mcdonald <--- filter all of my purchases at McDonald's
+	./clean.py amazon <---- filter all of my amazon purchases
+	./clean.py amazon,sprint <---- filter all of my amazon + sprint purchases
+	./clean.py mcdonald,horton <---- filter all of my McDonald's + Tim Hortons
+	
+	You get the point .... right ?
 """
 
 import os,sys,glob,re
@@ -17,7 +27,6 @@ def convert_to_float(price):
 	try:
 		return float(price)
 	except:
-		#print "failed on ", price
 		pass
 		
 def is_transaction_line(line): 
@@ -25,12 +34,16 @@ def is_transaction_line(line):
 		Figures out if a line in your statements is a CC transations or not. Tranactions
 		have the format
 		
-		<Date> 
+		<Date> ... bunch of spaces ...<Description>... bunch of spaces ...<Amount>
 		
 	"""
 	return len(TRANSACTION_LINE_REGEX.findall(line.strip())) > 0 and line[0] != 'x'
 
 def filter_by_tags(tags, info):
+	"""
+		If purchase info matches case-insenstive tag info, its a tag hit, and
+		should be displayed.
+	"""
 	info_as_list = [ t.lower() for t in info ]
 	info_as_string = " ".join(info_as_list)
 	tag_hit = False
@@ -38,10 +51,12 @@ def filter_by_tags(tags, info):
 		if tag in info_as_list or tag in info_as_string:
 			tag_hit = True
 			break
-
 	return tag_hit
 
 def clean(files, tags=[]):
+	"""
+		Parse all CC statements, filter by purcahse lines, filter by tags, help me itemize
+	"""
 	total_cost = 0.0
 	for f in files:
 		lines = open(f,'r').readlines()
