@@ -1,4 +1,7 @@
 #!/usr/bin/python
+#
+# By @josephmisiti 2-18-2013
+#
 
 """
 	Filter credit cards statements from Chase.com. 
@@ -34,8 +37,7 @@ def is_transaction_line(line):
 		Figures out if a line in your statements is a CC transations or not. Tranactions
 		have the format
 		
-		<Date> ... bunch of spaces ...<Description>... bunch of spaces ...<Amount>
-		
+		<Date> ... bunch of spaces ...<Description>... bunch of spaces ...<Amount>	
 	"""
 	return len(TRANSACTION_LINE_REGEX.findall(line.strip())) > 0 and line[0] != 'x'
 
