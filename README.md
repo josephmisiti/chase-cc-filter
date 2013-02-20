@@ -50,7 +50,9 @@ OR - how about all the times you ate in mcdonald's in the last year:
 josephmisiti$ ./clean.py mcdon
 
 04/18 MCDONALD'S F10623 NEW YORK NY 3.15
+
 05/11 MCDONALD'S F11679 RAMSEY NJ 3.2
+
 06/05 MCDONALD'S F10623 NEW YORK NY 1.09
 
 OR - how about your time warner bills:
@@ -64,6 +66,7 @@ OR - your time warner and sprint bills
 josephmisiti$ ./clean.py time,sprint
 
 02/02 SPRINT *WIRELESS 800-639-6111 KS 127.81
+
 02/13 TWC*TIME WARNER NYC 718-358-0900 NY 89.78
 
 You get the point, it may or may not save you a shitload of time..
