@@ -59,7 +59,6 @@ def clean(files, tags=[], args=[]):
 	"""
 		Parse all CC statements, filter by purcahse lines, filter by tags, help me itemize
 	"""
-	print(args)
 	total_cost = 0.0
 	for f in files:
 		lines = open(f,'r').readlines()
@@ -71,7 +70,7 @@ def clean(files, tags=[], args=[]):
 				transaction_info  = " ".join(line.strip().split()[1:-1])
 				amount			= line.strip().split()[len(line.strip().split())-1]
 
-				SEP = "|" if 'sort' in args else " "
+				SEP = "|" if 'sort' in args else "\t"
 
 				if len(tags) == 0:
 					print date_of_tranaction + SEP + transaction_info + SEP + "%s" % convert_to_float(amount)
