@@ -55,10 +55,11 @@ def filter_by_tags(tags, info):
 			break
 	return tag_hit
 
-def clean(files, tags=[]):
+def clean(files, tags=[], args=[]):
 	"""
 		Parse all CC statements, filter by purcahse lines, filter by tags, help me itemize
 	"""
+	print(args)
 	total_cost = 0.0
 	for f in files:
 		lines = open(f,'r').readlines()
@@ -69,12 +70,14 @@ def clean(files, tags=[]):
 				date_of_tranaction = line.strip().split()[0]
 				transaction_info  = " ".join(line.strip().split()[1:-1])
 				amount			= line.strip().split()[len(line.strip().split())-1]
-			
+
+				SEP = "|" if 'sort' in args else " "
+
 				if len(tags) == 0:
-					print date_of_tranaction,transaction_info, convert_to_float(amount)
+					print date_of_tranaction + SEP + transaction_info + SEP + "%s" % convert_to_float(amount)
 				else:						
 					if filter_by_tags(tags, line.strip().split()[1:-1]):
-						print "%s\t%s\t%s" % (date_of_tranaction,transaction_info, convert_to_float(amount))
+						print date_of_tranaction + SEP + transaction_info + SEP + "%s" % convert_to_float(amount)
 						total_cost += convert_to_float(amount)
 						
 	print "The total was ", total_cost
@@ -82,7 +85,7 @@ def clean(files, tags=[]):
 if __name__ == "__main__":
 	if len(sys.argv) > 1:
 		tags = [t for t in sys.argv[1:][0].strip().split(',') if len(t) > 0 ]
-		clean(glob.glob("./*.txt"),tags=tags)
+		clean(glob.glob("./pdfs/*.txt"),tags=tags, args=sys.argv)
 	else:
-		clean(glob.glob("./*.txt"),tags=[])
+		clean(glob.glob("./pdfs/*.txt"),tags=[], args=sys.argv)
 		

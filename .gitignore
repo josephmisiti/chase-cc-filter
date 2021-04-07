@@ -1,2 +1,3 @@
 *pdfs
 *.txt
+ .DS_Store
